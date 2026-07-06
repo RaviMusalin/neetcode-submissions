@@ -1,0 +1,26 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {number[]}
+     */
+    productExceptSelf(nums) {
+        const n = nums.length
+        const output = new Array(n).fill(1)
+
+        // First pass - calculate prefix for each index
+        let prefix = 1
+        for (let i = 0; i < nums.length; i++) {
+            output[i] = prefix
+            prefix *= nums[i]
+        }
+
+        // Second pass - Second Pass: Multiply with postfix product from right
+        let postfix = 1
+        for (let i = n - 1; i >= 0; i--) {
+            output[i] *= postfix
+            postfix *= nums[i]
+        }
+
+        return output
+    }
+}
